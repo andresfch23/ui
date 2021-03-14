@@ -1,0 +1,47 @@
+.button {
+    cursor: pointer;
+    padding: 0 10px;
+    position: relative;
+    border-radius: 5px;
+    box-sizing: border-box;
+    width: 80px;
+    height: 35px;
+    outline: 0;
+
+    &.button {
+        &__primary {
+            background-color: $main-blue;
+            color: $white;
+            border-color: transparent;
+        }
+    
+        &__secondary {
+            background-color: $white;
+            border: 0.5px solid lightgray;
+            color: black;
+        }
+    
+        &__withIcon {
+            padding-left: 30px;
+        }
+    }
+
+    &__hidden {
+        opacity: 0;
+    }
+
+    & .button-label {
+        text-transform: capitalize;
+        font-weight: 100;
+        letter-spacing: 0.1px;
+
+        .button__icon {
+            position: absolute;
+            top: 50%;
+            left: 13px;
+            transform: translateY(-50%);
+            width: 15px;
+            height: 15px;
+        }
+    }
+}

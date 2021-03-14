@@ -1,0 +1,18 @@
+// Media queries
+$screen-extra-small: 480px;
+$small-size: 620px;
+$medium-size: 767px;
+$large-size: 1024px;
+$max-width-container: 1440px;
+
+$extra-small-min: 'only screen and (min-width: #{$screen-extra-small})';
+$small-min: 'only screen and (min-width: #{$small-size})';
+$medium-min: 'only screen and (min-width: #{$medium-size})';
+$large-min: 'only screen and (min-width: #{$large-size})';
+$extra-small-max: 'only screen and (max-width: #{$screen-extra-small - 1})';
+$small-max: 'only screen and (max-width: #{$small-size - 1})';
+$medium-max: 'only screen and (max-width: #{$medium-size - 1})';
+$large-max: 'only screen and (max-width: #{$large-size - 1})';
+
+//Borders
+$border-grid: 1px solid $pearl;

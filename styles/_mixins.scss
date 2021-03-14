@@ -1,0 +1,13 @@
+@mixin secondary-title {
+    font-size: 21px;
+    font-weight: bold;
+    color: $gray-dark;
+}
+
+@mixin border-content {
+    border: 1px solid $gray-ash-light;
+}
+
+@mixin border-button {
+    border: 1px solid $gray-ash-dark;
+}

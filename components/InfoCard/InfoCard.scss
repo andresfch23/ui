@@ -1,0 +1,81 @@
+.info-card {
+    @include border-content;
+    display: grid;
+    grid-template-columns: 130px 1fr 190px;
+    padding: 20px;
+    margin: 0 20px 20px;
+    background-color: $white;
+    border-radius: 3px;
+    box-shadow: 2px 1px 10px 1px $gray-ash-light;
+    
+    @media #{$medium-max} {
+        grid-template-columns: 130px 1fr;
+    }
+
+    @media #{$extra-small-max} {
+        display: block;
+    }
+    
+
+
+    &__image {
+        @include border-content;
+        min-width: 100px;
+        height: 100px;
+        padding: 5px;
+        box-sizing: content-box;
+        margin-right: 20px;
+
+        @media #{$extra-small-max} {
+            width: fit-content;
+            margin: 0 auto;
+        }
+    }
+
+    &__fullname {
+        @include secondary-title;
+        margin: 5px 0 -3px;
+    }
+
+    &__skill {
+        color: $silver;
+        font-size: 13px;
+    }
+
+    &__info {
+        @media #{$extra-small-max} {
+            text-align: center;
+            margin: 20px;
+        }
+    }
+
+    &__description {
+        color: $gray-dark;
+        font-size: 15px;
+        margin: 10px 0 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+    }
+
+    &__button {
+        @include border-content;
+        align-self: flex-start;
+        min-width: 170px;
+        text-transform: none;
+        color: $main-blue;
+        font-size: 16px;
+        padding: 8px 20px;
+        margin-left: 20px;
+
+        @media #{$medium-max} {
+            grid-column: 1 / span 2;
+            margin: 20px 0 0;
+        }
+
+        @media #{$extra-small-max} {
+            width: 100%;
+        }
+    }
+}

@@ -1,0 +1,20 @@
+.cardLink {
+    flex-grow: 1;
+    cursor: default;
+    padding: 0 20px;
+
+    @media #{$small-max} {
+        padding: 0;
+    }
+
+    &__title {
+        font-size: 21px;
+        font-weight: 400;
+    }
+
+    &__item {
+        display: block;
+        color: $main-blue;
+        margin-bottom: 15px;
+    }
+}

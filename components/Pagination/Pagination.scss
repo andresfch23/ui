@@ -1,0 +1,72 @@
+.pagination {
+    margin: 40px auto;
+    width: fit-content;
+
+    &__container {
+        @include border-button;
+        margin-bottom: 10px;
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+
+        & li {
+            & button {
+                @include border-button;
+                border-width: 0 1px 0 0; 
+                margin: 0;
+                width: 40px;
+                height: 40px;
+                background-color: $white;
+                color: $main-blue;
+                text-transform: capitalize;
+                font-size: 15px;
+                
+                &:hover {
+                    background-color: rgba(63, 81, 181, 0.04);
+                }
+                
+                &:focus {
+                    outline: 0;
+                }
+
+                &.selected {
+                    background-color: $main-blue;
+                    margin: 0 1px 0 0;
+                    color: $white;
+                    border-color: $green-dark;
+
+                    &:hover {
+                        background-color: $deep-blue;
+                    }
+                }
+
+                &.disabled {
+                    color: #656565a3;
+                    cursor: default;
+
+                    &:hover {
+                        background-color: $white;
+                    }
+                }
+            }
+
+            &:first-child,
+            &:last-child {
+                & button {
+                    width: 60px;
+                }
+            }
+
+            &:last-child {
+                border-radius: inherit;
+
+                & button {
+                    border-right: 0;
+                    border-radius: inherit;
+                }
+            }
+        }
+    }
+}

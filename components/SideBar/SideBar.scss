@@ -1,0 +1,9 @@
+.sidebar {
+    background-color: $white;
+
+    &__filters {
+        padding-bottom: 40px;
+        border-bottom: 1px solid lightgray;
+        margin-bottom: 90px;
+    }
+}

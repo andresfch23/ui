@@ -1,0 +1,177 @@
+.header {
+    &__main {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px 30px;
+
+        &-logo {
+            width: 100px;
+            color: red;
+        }
+
+        &-options {
+            & a {
+               margin: 0 20px 0 10px;
+               color: $main-blue;
+
+               @media #{$large-max} {
+                   display: none;
+               }
+            }
+            
+            & .button:last-child {
+                margin-left: 15px;
+            }
+        }
+    }
+
+    &__secondary {
+        background-color: $main-blue;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 7px 20px;
+
+        @media #{$medium-max} {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        @media #{$small-max} {
+            align-items: center;
+        }
+    }
+
+    &__breadcrumb {
+        color: $white;
+        font-weight: 100;
+            
+        @media #{$medium-max} {
+            font-size: 12px;
+            padding-bottom: 12px;
+        }
+
+        &-selected {
+            color: inherit;
+            text-decoration: underline;
+            font-weight: inherit;
+
+            @media #{$medium-max} {
+                font-size: 12px;
+            }
+        }
+        
+    }
+
+    &__searchbar {
+        display: flex;
+        color: $white;
+
+        @media #{$medium-max} {
+            width: 100%;
+        }
+
+        @media #{$small-max} {
+            flex-direction: column;
+        }
+
+        &-option {
+            display: none;
+        }
+
+        &-container {
+            background-color: $main-blue;
+            width: 205px;
+            cursor: pointer;
+
+            @media #{$small-max} {
+                width: 100%;
+            }
+
+            & svg {
+                color: $white;
+                right: 10px;
+            }
+
+            &::before,
+            &::after {
+                content: none;
+            }
+
+            & .MuiPopover-root {
+                & .MuiPaper-root {
+                    margin-top: 2px;
+                    border-radius: 0;
+                }
+            }
+        }
+
+        &-select.select {
+            padding: 12px 50px 11px 15px;
+            font-size: 15px;
+            color: #FFFFFF;
+            border: 1px solid white;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-right: 0;
+
+            @media #{$small-max} {
+                border: 1px solid white;
+                border-radius: 5px;
+            }
+
+            & option {
+                color: black;
+            }
+
+            &:focus {
+                background-color: $main-blue;
+            }
+        }
+
+        &-input {
+            outline: 0;
+            border-color: transparent;
+            padding: 10px 15px;
+            width: 340px;
+
+            @media #{$large-max} {
+                width: 150px;
+            }
+
+            @media #{$medium-max} {
+                flex-grow: 1;
+            }
+
+            @media #{$small-max} {
+                width: 100%;
+            }
+        }
+
+        &-button {
+            outline: 0;
+            background-color: $main-blue;
+            color: #B9C8DD;
+            border: 1px solid white;
+            padding: 0 15px;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+
+            @media #{$small-max} {
+                padding: 15px;
+            }
+        }
+
+        & .text {
+            position: absolute;
+            font-weight: 100;
+            top: 50%;
+            right: 35px;
+            transform: translateY(-40%);
+            font-size: 15px;
+        }
+    }
+}
+
