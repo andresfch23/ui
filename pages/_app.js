@@ -23,7 +23,14 @@ const theme = createMuiTheme({
             '"Segoe UI Emoji"',
             '"Segoe UI Symbol"',
         ].join(','),
-        fontWeightRegular: 100
+        fontWeightRegular: 100,
+        overrides: {
+            MuiTypography: {
+                body1: {
+                    fontFamily: 'ProximaNova',
+                }
+            }
+        }
     }
 });
 
@@ -41,15 +48,16 @@ function MyApp({ Component, pageProps }) {
         <>  
             <Head>
                 <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+                <title> UI Search</title>
             </Head>
-            <StylesProvider injectFirst>
-                <Header />
-                <IconsCollection />
-                <ThemeProvider theme={theme}>
+            <ThemeProvider theme={theme}>
+                <StylesProvider injectFirst>
+                    <Header />
+                    <IconsCollection />
                     <Component {...pageProps} />
-                </ThemeProvider>
-                <Footer />
-            </StylesProvider>
+                    <Footer />
+                </StylesProvider>
+            </ThemeProvider>
         </>
     );
 }

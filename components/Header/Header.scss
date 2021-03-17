@@ -2,7 +2,16 @@
     &__main {
         display: flex;
         justify-content: space-between;
-        margin: 20px 30px;
+        padding: 20px 30px;
+        position: relative;
+        background-color: $white;
+        width: 100%;
+        border-bottom: $border-gray;
+
+        &--fixed {
+            position: fixed;
+            z-index: 1;
+        }
 
         &-logo {
             width: 100px;
@@ -10,17 +19,50 @@
         }
 
         &-options {
+            transition: all 0.3s linear;
+
+            & .button:last-child {
+                margin-left: 15px;
+            }
+
+            @media #{$small-max} {
+                position: fixed;
+                right: -201px;
+                top: 71px;
+                background-color: #fcfcfa;
+                z-index: 2;
+                display: grid;
+                grid-template-columns: 200px;
+                grid-template-rows: repeat(4,45px);
+                height: 100vh;
+                justify-items: center;
+                align-items: center;
+                border-top: $border-gray;
+                border-left: $border-gray;
+                padding-top: 20px;
+
+                & .button {
+                    margin: 0;
+
+                    &:last-child {
+                        margin: 20px 0 0 0;
+                    }
+                }
+
+                & a {
+                    margin: 0;
+                }
+            }
+
             & a {
                margin: 0 20px 0 10px;
                color: $main-blue;
-
-               @media #{$large-max} {
-                   display: none;
-               }
+               -webkit-tap-highlight-color: rgba(0,0,0,0);
             }
             
-            & .button:last-child {
-                margin-left: 15px;
+
+            &--opened {
+                right: 0;
             }
         }
     }
@@ -32,9 +74,12 @@
         justify-content: space-between;
         padding: 7px 20px;
 
+        &--fixed {
+            padding-top: 78.5px;
+        }
+
         @media #{$medium-max} {
             flex-direction: column;
-            align-items: flex-start;
         }
 
         @media #{$small-max} {
@@ -47,8 +92,8 @@
         font-weight: 100;
             
         @media #{$medium-max} {
-            font-size: 12px;
-            padding-bottom: 12px;
+            font-size: 14px;
+            padding: 12px 0;
         }
 
         &-selected {
@@ -57,7 +102,7 @@
             font-weight: inherit;
 
             @media #{$medium-max} {
-                font-size: 12px;
+                font-size: 14px;
             }
         }
         
@@ -81,7 +126,7 @@
 
         &-container {
             background-color: $main-blue;
-            width: 205px;
+            width: 200px;
             cursor: pointer;
 
             @media #{$small-max} {
@@ -169,8 +214,57 @@
             font-weight: 100;
             top: 50%;
             right: 35px;
-            transform: translateY(-40%);
+            transform: translateY(-45%);
             font-size: 15px;
+        }
+    }
+
+    &__hamburguer {
+        padding: 6px;
+        background-color: transparent;
+        border: 0;  
+        display: none;
+        transition: all 0.5s linear;
+
+        @media #{$small-max} {
+            display: block;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+
+        &:focus {
+            outline: 0;
+        }
+
+        &-line {
+            height: 3px;
+            width: 25px;
+            background-color: $main-blue;
+            display: block;
+            margin-bottom: 5px;
+            transition: all 0.2s linear;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        &--opened {
+            .header__hamburguer-line {
+                position: absolute;
+                right: 35px;
+
+                &:nth-child(1) {
+                    transform: rotate(45deg);
+                }
+
+                &:nth-child(2) {
+                    transform: rotate(135deg);
+                }
+                
+                &:last-child {
+                    display: none;
+                }
+            }
         }
     }
 }

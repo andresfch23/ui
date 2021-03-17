@@ -19,7 +19,7 @@ const InfoCard = ({ data }) => {
         <div className="info-card">
 
             <div className="info-card__image">
-                <Image src={photoUrl} width={100} height={100} />
+                <Image src={photoUrl} width={100} height={100} alt='placeholder' />
             </div>
             
             <div className="info-card__info">

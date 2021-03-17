@@ -35,7 +35,8 @@
         font-weight: 100;
         letter-spacing: 0.1px;
 
-        .button__icon {
+        .icon {
+            display: block;
             position: absolute;
             top: 50%;
             left: 13px;

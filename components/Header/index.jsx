@@ -10,11 +10,16 @@ import MenuItem from '@material-ui/core/MenuItem';
 const Header = () => {
     const [searchText, setSearchText] = useState('');
     const [typeDeveloper, setTypeDeveloper] = useState('Select a developer');
+    const [openHamurguerMenu, setOpenHamburguerMenu] = useState(false);
 
     const onChangeText = (e) => {
         const value = e.target.value;
 
         setSearchText(value);
+    }
+
+    const onToggleMenu = () => {
+        setOpenHamburguerMenu(!openHamurguerMenu);
     }
 
     const handleChangeTypeDeveloper = (e) => {
@@ -25,9 +30,9 @@ const Header = () => {
 
     return (
         <div className='header'>
-            <div className='header__main'>
+            <div className={`header__main ${openHamurguerMenu ? 'header__main--fixed' : ''}`}>
                 <img className='header__main-logo' src="./images/logo.svg" alt="Toptal logo"/>
-                <nav className='header__main-options'>
+                <nav className={`header__main-options ${openHamurguerMenu ? 'header__main-options--opened' : ''}`}>
                     <Link href="/developers">
                         <a>Find Developers</a>
                     </Link>
@@ -46,9 +51,15 @@ const Header = () => {
                         color="primary"
                     />
                 </nav>
+
+                <button className={`header__hamburguer ${openHamurguerMenu ? 'header__hamburguer--opened' : ''}`} onClick={onToggleMenu} >
+                    <span className="header__hamburguer-line"></span>
+                    <span className="header__hamburguer-line"></span>
+                    <span className="header__hamburguer-line"></span>
+                </button>
             </div>
 
-            <div className='header__secondary'>
+            <div className={`header__secondary ${openHamurguerMenu ? 'header__secondary--fixed' : ''}`}>
                 <Breadcrumbs separator="›" aria-label="breadcrumb" className="header__breadcrumb">
                     <Link href="/" onClick={() => {}}>
                         <a>Home</a>

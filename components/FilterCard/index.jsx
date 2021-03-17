@@ -34,8 +34,8 @@ const FilterCard = ({ info = [], title = '' }) => {
         <Accordion defaultExpanded className="filter-card container">
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
+                aria-controls={`panel1a-content-${getFormattedInfo(title, '-')}`}
+                id={`panel1a-header-${getFormattedInfo(title, '-')}`}
                 classes={{
                     root: 'filter-card__accordion',
                     content: 'filter-card__title',

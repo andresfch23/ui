@@ -1,6 +1,6 @@
 import Icon from '../../components/Icon';
 import Image from 'next/image';
-import Button from '@material-ui/core/Button';
+import ModalForm from '../../components/ModalForm';
 
 const Resume = () => {
     const data = {
@@ -61,7 +61,7 @@ const Resume = () => {
                         </span>
                         <div className="resume-bio__main">
                             <div className="resume-bio__image">
-                                <Image src={photoUrl} width={100} height={100} />
+                                <Image src={photoUrl} width={100} height={100} alt='placeholder' />
                             </div>
                             <p className="resume-bio__description">{bio}</p>
                         </div>
@@ -70,14 +70,7 @@ const Resume = () => {
 
                 <aside className="resume-sidebar">
                     <h2 className="resume-sidebar__title">Contact Options</h2>
-                    <Button
-                        classes={{ label: 'resume-sidebar__button-label' }}
-                        className='resume-sidebar__button'
-                    >
-                        <Icon name='people-connected' />
-
-                        <span className="text">Connect</span>
-                    </Button>
+                    <ModalForm fullName={fullName} />
                 </aside>
 
                 <div className="resume-experience">

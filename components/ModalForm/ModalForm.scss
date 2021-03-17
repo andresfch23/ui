@@ -1,0 +1,145 @@
+.modal-form {
+    &__container {
+        box-shadow: 0 4px 10px -2px black;
+        border-radius: 12px;
+        position: relative;
+
+        @media #{$medium-min} {
+            min-width: 750px;
+        }
+
+        @media #{$small-max} {
+            min-width: 405px;
+        }
+
+        .icon-x {
+            color: $silver;
+            position: absolute;
+            right: 30px;
+            top: 20px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    }
+
+    &__title {
+        color: $silver;
+        border-bottom: $border-gray;
+        padding: 16px 30px 10px;
+        
+        & h2 {
+            font-size: 20px;
+        }
+    }
+
+    &__name {
+        display: block;
+        color: $gray-dark;
+        font-size: 30px;
+        font-weight: bold;
+        margin-top: -7px;
+    }
+
+    &__content {
+        padding: 0px 30px 8px;
+        margin: 18px 0 35px;
+    }
+
+    &__footer {
+        border-top: $border-gray;
+        padding: 20px 30px;
+    }
+
+    &__button {
+        width: 90px;
+        height: 45px;
+        font-size: 16px;
+
+        &:first-child {
+            border-color: $gray-dark;
+        }
+    }
+}
+
+.form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+        "first last"
+        "email email"
+        "textarea captcha";
+    grid-gap: 20px 35px;
+    margin-top: 1px;
+
+    @media #{$medium-max} {
+        grid-template-columns: 100%;
+        grid-template-areas:
+            "first"
+            "last"
+            "email"
+            "textarea"
+            "captcha";
+    }
+
+    &__item {
+        &--email {
+            grid-area: email;
+        }
+
+        &--lastname {
+            grid-area: last;
+        }
+
+        &--firstname {
+            grid-area: first;
+            
+            & .icon {
+                font-size: 16px;
+                color: #838383;
+            }
+        }
+
+        &--textarea {
+            grid-area: textarea;
+            resize: vertical;
+            min-height: 120px;
+            border-color: $gray;
+            font-family: 'ProximaNova';
+            font-size: 18px;
+            font-weight: 500;
+            padding: 13px;
+
+            &:focus {
+                outline: 1;
+                outline-color: #3F51B5;
+            }
+
+            &::placeholder {
+                color: $gray;
+            }
+        }
+
+        &--recaptcha {
+            grid-area: captcha;
+            padding: 20px;
+            border: 1px solid gainsboro;
+            background-color: $chalk;
+            max-height: 120px;
+            resize: vertical;
+        }
+    }
+
+    &__input {
+        height: 50px;
+        border-radius: 0;
+        color: $gray;
+
+        & input {
+            font-size: 18px;
+            color: #4a4a4a;
+            font-weight: 500;
+            padding: 13px;
+        }
+    }
+}

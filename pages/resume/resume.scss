@@ -1,6 +1,6 @@
 .resume {
     margin-bottom: 30px;
-    border-bottom: $border-grid;
+    border-bottom: $border-gray;
     background-color: $white;
 
     &__container {
@@ -49,10 +49,14 @@
     &-bio {
         padding-right: 25px;
 
+        @media #{$small-max} {
+            text-align: center;
+        }
+
         &__title {
             font-size: 45px;
             font-weight: 600;
-            margin-bottom: 40px 0 0;
+            margin: 40px 0 0;
             color: $gray-dark;
         }
 
@@ -73,7 +77,12 @@
             display: flex;
             margin: 25px 0;
             padding-bottom: 20px;
-            border-bottom: $border-grid;
+            border-bottom: $border-gray;
+
+            @media #{$small-max} {
+                flex-direction: column;
+                align-items: center;
+            }
         }
 
         &__image {
@@ -81,6 +90,10 @@
             height: 100px;
             box-sizing: content-box;
             margin-right: 10px;
+
+            @media #{$small-max} {
+                margin-bottom: 25px;
+            }
         }
 
         &__description {
@@ -96,11 +109,12 @@
         border-left: 2px solid #e8e8e8eb;
 
         @media #{$large-max} {
-            border-left: $border-grid;
+            border: 0;
         }
 
         @media #{$medium-max} {
             margin-bottom: 30px;
+            border-left: 1px solid #e8e8e8eb;
         }
 
         @media #{$small-max} {
@@ -126,12 +140,17 @@
 
             &-label {
                 display: block;
-                border: $border-grid;
+                border: $border-gray;
                 padding: 20px;
                 border-radius: 10px;
 
                 @media #{$large-max} {
                     padding: 5px 0;
+                }
+
+                .MuiButton-startIcon {
+                    margin: 0;
+                    display: initial;
                 }
 
                 & .icon {
@@ -181,7 +200,7 @@
     &-experience {
         grid-area: experience;
         color: $gray-dark;
-        border-right: $border-grid;
+        border-right: $border-gray;
         padding-right: 20px;
         margin-bottom: 30px;
 
@@ -257,7 +276,7 @@
             margin: 0;
             padding: 0 0 20px;
             list-style-type: none;
-            border-bottom: $border-grid;
+            border-bottom: $border-gray;
 
             & li {
                 padding-bottom: 10px;
