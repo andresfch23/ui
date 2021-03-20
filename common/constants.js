@@ -2,6 +2,9 @@ export const RESULTS_PER_PAGE = 10;
 
 export const DROPDOWN_DEFAULT_VALUE = 'Select a developer';
 
+export const DEVELOPERS_ROUTE = '/developers';
+export const PROFILE_ROUTE = '/profile';
+
 export const FIRST_NAME = 'firstName';
 export const LAST_NAME = 'lastName';
 export const EMAIL = 'email';

@@ -1,4 +1,5 @@
 import { getFormattedInfo } from  '../common/helpers';
+import { DEVELOPERS_ROUTE } from '../common/constants';
 
 const BASE_URL = 'http://private-anon-63f632714e-toptalui.apiary-mock.com';
 
@@ -41,7 +42,7 @@ export const getSkills = async () => {
 };
 
 export const getDevelopers = async () => {
-    const params = '/developers';
+    const params = DEVELOPERS_ROUTE;
 
     try {
         const fetchedData = await fetch(`${BASE_URL}${params}`);

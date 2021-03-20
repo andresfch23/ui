@@ -103,8 +103,8 @@ const ModalForm = ({ firstName = '', lastName = '' }) => {
     return (
         <div className='modal-form'>
             <ButtonMaterial
-                classes={{ label: 'resume-sidebar__button-label' }}
-                className='resume-sidebar__button'
+                classes={{ label: 'profile-sidebar__button-label' }}
+                className='profile-sidebar__button'
                 startIcon={<Icon name='people-connected' />}
                 onClick={handleClickOpen}
             >

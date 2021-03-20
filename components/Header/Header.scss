@@ -23,7 +23,7 @@
             @media #{$small-max} {
                 position: fixed;
                 right: -201px;
-                top: 71px;
+                top: 81px;
                 background-color: #fcfcfa;
                 z-index: 2;
                 display: grid;
@@ -70,7 +70,7 @@
         padding: 7px 20px;
 
         &--fixed {
-            padding-top: 78.5px;
+            padding-top: 88px;
         }
 
         @media #{$medium-max} {

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
 import Image from 'next/image';
 import Link from 'next/link';
+import { PROFILE_ROUTE } from '../../common/constants';
 
 const InfoCard = ({ data }) => {
     const {
@@ -27,9 +27,9 @@ const InfoCard = ({ data }) => {
                 <span className="info-card__skill">{`${skills[0].title} expert`}</span>
                 <p className="info-card__description">{generalBio}</p>
             </div>
-
+            
             <div className="MuiButtonBase-root MuiButton-root info-card__button MuiButton-outlinedPrimary" >
-                <Link href={`/resume/${url}`}>
+                <Link href={`${PROFILE_ROUTE}/${url}`}>
                     <a className="info-card__button-link">View profile</a>
                 </Link>
             </div>

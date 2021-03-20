@@ -3,11 +3,12 @@ import Router from "next/router";
 import Fab from '@material-ui/core/Fab';
 import HomeIcon from '@material-ui/icons/Home';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { DEVELOPERS_ROUTE } from '../common/constants';
 
 export default function Home() {
     useEffect(() => {
         const timer = setTimeout(() => {
-            Router.replace('/developers');
+            Router.replace(DEVELOPERS_ROUTE);
         }, 3000);
 
         return () => clearTimeout(timer);

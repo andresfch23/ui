@@ -3,11 +3,12 @@ import Router from "next/router";
 import Fab from '@material-ui/core/Fab';
 import ReportProblemIcon from '@material-ui/icons/ReportProblem';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { DEVELOPERS_ROUTE } from '../../common/constants';
 
 export default function Home() {
     useEffect(() => {
         const timer = setTimeout(() => {
-            Router.replace('/');
+            Router.replace(DEVELOPERS_ROUTE);
         }, 3000);
 
         return () => clearTimeout(timer);
@@ -22,7 +23,7 @@ export default function Home() {
                 </Fab>
                 <CircularProgress size={68} className="modal-form__animations-progress" />
             </div>
-            <p className="not-found__button-redirect">Redirecting to Home page . . .</p>
+            <p className="not-found__button-redirect">Redirecting to Developers page . . .</p>
         </div>
     )
 }

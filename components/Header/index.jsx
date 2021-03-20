@@ -9,7 +9,7 @@ import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
 import { FiltersContext } from '../../contexts/FiltersProvider';
-import { DROPDOWN_DEFAULT_VALUE } from '../../common/constants';
+import { DROPDOWN_DEFAULT_VALUE, DEVELOPERS_ROUTE, PROFILE_ROUTE } from '../../common/constants';
 import Icon from '../Icon';
 
 const Header = () => {
@@ -33,8 +33,8 @@ const Header = () => {
         last_name = ''
     } = selectedDeveloper;
 
-    const isInResumePage = pathname.includes('/resume');
-    const breadcrumSelected = isInResumePage ? `${first_name} ${last_name}` : 'Find Developers';
+    const isInProfilePage = pathname.includes(PROFILE_ROUTE);
+    const breadcrumSelected = isInProfilePage ? `${first_name} ${last_name}` : 'Find Developers';
 
     const [searchText, setSearchText] = useState('');
     const [options, setOptions] = useState([DROPDOWN_DEFAULT_VALUE]);
@@ -72,7 +72,7 @@ const Header = () => {
     };
 
     const handleSearchByLocation = () => {
-        const routeDevelopers = '/developers';
+        const routeDevelopers = DEVELOPERS_ROUTE;
 
         if (pathname !== routeDevelopers) {
             push(routeDevelopers);
@@ -100,7 +100,7 @@ const Header = () => {
                 </Link>
 
                 <nav className={`header__main-options ${openHamurguerMenu ? 'header__main-options--opened' : ''}`}>
-                    <Link href="/developers">
+                    <Link href={DEVELOPERS_ROUTE}>
                         <a>Find Developers</a>
                     </Link>
                     
@@ -129,11 +129,11 @@ const Header = () => {
                     <Link href="/">
                         <a>Home</a>
                     </Link>
-                    <Link href="/developers">
+                    <Link href={DEVELOPERS_ROUTE}>
                         <a>Why Top 3%</a>
                     </Link>
-                    {isInResumePage &&
-                        <Link href="/developers">
+                    {isInProfilePage &&
+                        <Link href={DEVELOPERS_ROUTE}>
                             <a>Find Developers</a>
                         </Link>
                     }
