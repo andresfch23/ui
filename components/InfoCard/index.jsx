@@ -27,18 +27,12 @@ const InfoCard = ({ data }) => {
                 <span className="info-card__skill">{`${skills[0].title} expert`}</span>
                 <p className="info-card__description">{generalBio}</p>
             </div>
-            
-            <Link href={`/resume/${url}`}>
-                <a className="info-card__button-link">
-                    <Button
-                        className="info-card__button"
-                        variant="outlined"
-                        color="primary"
-                    >
-                        View profile
-                    </Button>
-                </a>
-            </Link>
+
+            <div className="MuiButtonBase-root MuiButton-root info-card__button MuiButton-outlinedPrimary" >
+                <Link href={`/resume/${url}`}>
+                    <a className="info-card__button-link">View profile</a>
+                </Link>
+            </div>
         </div>
     )
 };
