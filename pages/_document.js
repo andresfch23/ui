@@ -8,6 +8,7 @@ export default class MyDocument extends Document {
             <Html lang="en">
                 <Head>
                     <link href="/fonts/styles.css" rel="stylesheet" />
+                    <link rel="shortcut icon" href="/favicon.ico" />
                 </Head>
                 <body>
                     <Main />
