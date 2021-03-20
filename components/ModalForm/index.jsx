@@ -100,7 +100,6 @@ const ModalForm = ({ firstName = '', lastName = '' }) => {
         }
     };
 
-
     return (
         <div className='modal-form'>
             <ButtonMaterial
@@ -113,7 +112,7 @@ const ModalForm = ({ firstName = '', lastName = '' }) => {
             </ButtonMaterial>
 
             <Dialog
-                open={true}
+                open={open}
                 PaperProps={{ classes: { root: 'modal-form__container' } }}
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
