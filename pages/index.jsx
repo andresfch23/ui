@@ -8,7 +8,7 @@ export default function Home() {
     useEffect(() => {
         const timer = setTimeout(() => {
             Router.replace('/developers');
-        }, 2000);
+        }, 3000);
 
         return () => clearTimeout(timer);
     }, []);
@@ -20,8 +20,9 @@ export default function Home() {
             <div className="home__button">
                 <Fab aria-label="home" className="home__button-container" disabled>
                     <HomeIcon className="home__button-icon" />
-                    <CircularProgress size={68} className="modal-form__animations-progress" />
                 </Fab>
+
+                <CircularProgress size={68} className="modal-form__animations-progress" />
             </div>
             <p className="home__button-redirect">Redirecting to Developers page . . .</p>
         </div>

@@ -103,10 +103,8 @@ const Header = () => {
                     <Link href="/developers">
                         <a>Find Developers</a>
                     </Link>
-
-                    <Link href="#">
-                        <a>Resources</a>
-                    </Link>
+                    
+                    <a href="#">Resources</a>
 
                     <Button 
                         typeAction="sign"
@@ -131,7 +129,7 @@ const Header = () => {
                     <Link href="/">
                         <a>Home</a>
                     </Link>
-                    <Link href="#">
+                    <Link href="/developers">
                         <a>Why Top 3%</a>
                     </Link>
                     {isInResumePage &&

@@ -28,15 +28,17 @@ const InfoCard = ({ data }) => {
                 <p className="info-card__description">{generalBio}</p>
             </div>
             
-            <Button
-                className="info-card__button"
-                variant="outlined"
-                color="primary"
-            >
-                <Link href={`/resume/${url}`}>
-                    <a>View profile</a>
-                </Link>
-            </Button>
+            <Link href={`/resume/${url}`}>
+                <a className="info-card__button-link">
+                    <Button
+                        className="info-card__button"
+                        variant="outlined"
+                        color="primary"
+                    >
+                        View profile
+                    </Button>
+                </a>
+            </Link>
         </div>
     )
 };

@@ -19,8 +19,8 @@ export default function Home() {
             <div className="not-found__button">
                 <Fab aria-label="not-found" className="not-found__button-container" disabled>
                     <ReportProblemIcon className="not-found__button-icon" />
-                    <CircularProgress size={68} className="modal-form__animations-progress" />
                 </Fab>
+                <CircularProgress size={68} className="modal-form__animations-progress" />
             </div>
             <p className="not-found__button-redirect">Redirecting to Home page . . .</p>
         </div>

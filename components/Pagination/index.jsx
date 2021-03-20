@@ -29,7 +29,7 @@ const Pagination = () => {
     return (
         <nav id="pagination" className={`pagination ${total <= RESULTS_PER_PAGE + 1 ? 'pagination__no-results' : ''}`}>
             <ul className='pagination__container'>
-                {items.map(({ page, type, onClick, ...item }, index) => {
+                {items.map(({ page, type, onClick }, index) => {
                     let children = null;
 
                     const onClickPage = (e, page) => {
@@ -42,7 +42,7 @@ const Pagination = () => {
                         children = '…';
                     } else if (type === 'page') {
                         children = (
-                            <button type="button" className={`${page === selectedPage ? 'selected' : ''}`} {...item} onClick={(e) => onClickPage(e, page)}>
+                            <button type="button" className={`${page === selectedPage ? 'selected' : ''}`} onClick={(e) => onClickPage(e, page)}>
                                 {page}
                             </button>
                         );
@@ -56,7 +56,7 @@ const Pagination = () => {
                         }
 
                         children = (
-                            <button className={disabled} type="button" {...item} onClick={(e) => onClickPage(e, page)}>
+                            <button className={disabled} type="button" onClick={(e) => onClickPage(e, page)}>
                                 {type}
                             </button>
                         );
@@ -69,7 +69,7 @@ const Pagination = () => {
                         }
 
                         children = (
-                            <button className={disabled} type="button" {...item} onClick={(e) => onClickPage(e, page)}>
+                            <button className={disabled} type="button" onClick={(e) => onClickPage(e, page)}>
                                 {type}
                             </button>
                         );

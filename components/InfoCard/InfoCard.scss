@@ -68,12 +68,11 @@
         text-transform: none;
         color: $main-blue;
         font-size: 16px;
-        padding: 0;
+        padding: 8px 20px;
         margin-left: 20px;
 
-        & a {
-            width: 100%;
-            padding: 8px 20px;
+        &-link {
+            height: fit-content;
         }
 
         @media #{$medium-max} {

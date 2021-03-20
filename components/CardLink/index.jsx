@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import PropTypes from 'prop-types';
 import Button from '../Button';
 
@@ -9,9 +8,7 @@ const CardLink = ({ title = '', links = [], optionButtons = {} }) => {
             
             {links.length ? (
                 links.map(link => (
-                    <Link href="#" key={`link-${link}`}>
-                        <a className="cardLink__item">{link}</a>
-                    </Link>
+                    <a href="#" key={`link-${link}`} className="cardLink__item">{link}</a>
                 ))
             ) : null}
 
