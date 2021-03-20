@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
@@ -10,25 +10,35 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import PropTypes from 'prop-types';
 import { getFormattedInfo } from '../../common/helpers';
+import { FiltersContext } from '../../contexts/FiltersProvider';
 
-const FilterCard = ({ info = [], title = '' }) => {
+const FilterCard = ({ info = [], title = '', typeFilter = '' }) => {
     let initialState = {};
+    const {
+        toggleFilter,
+        categoryFilters
+    } = useContext(FiltersContext);
+    const isCategory = typeFilter === 'category';
 
-    const formattedInfo = info.map(info => {
-        const id = getFormattedInfo(info.title);
-        const newInfo = { ...info, id };
-
-        initialState[id] = false;
-
-        return newInfo;
-    });
+    info.forEach(({ id }) => { initialState[id] = false });
 
     const [infoType, setInfoType] = useState(initialState);
 
+    const handleChangeInfoType = (event, title) => {
+        if (!isCategory) {
+            setInfoType({ ...infoType, [event.target.name]: event.target.checked });
+        }
 
-    const handleChangeInfoType = (event) => {
-        setInfoType({ ...infoType, [event.target.name]: event.target.checked });
+        toggleFilter(typeFilter, title);
     };
+
+    const setCheckedValue = (value) => {
+        const findFilter = categoryFilters.find(filter => filter === value);
+
+        if (findFilter) return true;
+
+        return false;
+    }
 
     return (
         <Accordion defaultExpanded className="filter-card container">
@@ -47,21 +57,26 @@ const FilterCard = ({ info = [], title = '' }) => {
             <AccordionDetails classes={{ root: 'filter-card__accordion-details' }}>
                 <FormControl className="filter-card__control" component="fieldset">
                     <FormGroup className="filter-card__options">
-                        {formattedInfo.map(({ id, title }) => (
-                            <FormControlLabel
-                                key={id}
-                                classes={{ label: 'filter-card__label' }}
-                                control={
-                                    <Checkbox
-                                        className="filter-card__checkbox"
-                                        checked={infoType[id]}
-                                        onChange={handleChangeInfoType}
-                                        name={id}
-                                    />
-                                }
-                                label={title}
-                            />
-                        ))}
+                        {info.map(({ id, title }) => {
+                            const isChecked = isCategory ? setCheckedValue(title) : infoType[id];
+
+                            return (
+                                <FormControlLabel
+                                    key={id}
+                                    classes={{ label: 'filter-card__label' }}
+                                    value={isChecked}
+                                    control={
+                                        <Checkbox
+                                            className="filter-card__checkbox"
+                                            checked={isChecked}
+                                            onChange={(e) => handleChangeInfoType(e, title)}
+                                            name={id}
+                                        />
+                                    }
+                                    label={title}
+                                />
+                            )
+                        })}
                     </FormGroup>
                 </FormControl>
             </AccordionDetails>
@@ -71,7 +86,8 @@ const FilterCard = ({ info = [], title = '' }) => {
 
 FilterCard.propTypes = {
     info: PropTypes.array,
-    title: PropTypes.string
+    title: PropTypes.string,
+    typeFilter: PropTypes.string
 }
 
 export default FilterCard;

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Image from 'next/image';
-import { getFormattedInfo } from '../../common/helpers';
+import Link from 'next/link';
 
 const InfoCard = ({ data }) => {
     const {
@@ -9,11 +9,11 @@ const InfoCard = ({ data }) => {
         last_name,
         skills,
         generalBio,
-        photoUrl
+        photoUrl,
+        url
     } = data;
 
     const fullName = `${first_name} ${last_name}`;
-    const url = getFormattedInfo(fullName, '-');
 
     return (
         <div className="info-card">
@@ -32,9 +32,10 @@ const InfoCard = ({ data }) => {
                 className="info-card__button"
                 variant="outlined"
                 color="primary"
-                href={`/resume/${''}`}
             >
-                View profile
+                <Link href={`/resume/${url}`}>
+                    <a>View profile</a>
+                </Link>
             </Button>
         </div>
     )

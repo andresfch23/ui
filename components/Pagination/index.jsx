@@ -1,23 +1,40 @@
 import { usePagination } from '@material-ui/lab/Pagination';
-import { useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import { FiltersContext } from '../../contexts/FiltersProvider';
+import { RESULTS_PER_PAGE } from '../../common/constants';
 
 const Pagination = () => {
-    const count = 3;
+    const {
+        selectedPage,
+        setSelectedPage,
+        total,
+        setClickedFromPagination
+    } = useContext(FiltersContext);
+    const [countPagination, setCountPagination] = useState();
 
     const { items } = usePagination({
-        count: count,
+        count: countPagination
     });
 
-    const [selectedPage, setSelectedPage] = useState(1);
+    useEffect(() => {
+        calculatePagination(total);
+    }, [total, selectedPage]);
+
+    const calculatePagination = (total) => {
+        const numberOfPages = Math.ceil(total / RESULTS_PER_PAGE);
+
+        setCountPagination(numberOfPages);
+    };
 
     return (
-        <nav className="pagination">
+        <nav id="pagination" className={`pagination ${total <= RESULTS_PER_PAGE + 1 ? 'pagination__no-results' : ''}`}>
             <ul className='pagination__container'>
-                {items.map(({ page, type, selected, onClick, ...item }, index) => {
+                {items.map(({ page, type, onClick, ...item }, index) => {
                     let children = null;
 
                     const onClickPage = (e, page) => {
                         setSelectedPage(page);
+                        setClickedFromPagination(true);
                         onClick(e);
                     }
 
@@ -25,7 +42,7 @@ const Pagination = () => {
                         children = '…';
                     } else if (type === 'page') {
                         children = (
-                            <button type="button" className={`${selected ? 'selected' : ''}`} {...item} onClick={(e) => onClickPage(e, page)}>
+                            <button type="button" className={`${page === selectedPage ? 'selected' : ''}`} {...item} onClick={(e) => onClickPage(e, page)}>
                                 {page}
                             </button>
                         );
@@ -46,7 +63,7 @@ const Pagination = () => {
                     } else {
                         let disabled = '';
 
-                        if (selectedPage === count) {
+                        if (selectedPage === countPagination) {
                             type = 'page';
                             disabled = 'disabled';
                         }

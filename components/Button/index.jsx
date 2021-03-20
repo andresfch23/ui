@@ -1,27 +1,20 @@
 import Icon from '../Icon';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
+import { BUTTON_TYPES } from '../../common/constants';
 
 const ButtonComponent = ({
-    type = "", 
+    typeAction = "", 
     color = "primary",
     disabled = false,
     onClick = () => {},
     textBtn = '',
-    className = ''
+    className = '',
+    ...rest
 }) => {
-    const BUTTON_TYPES = {
-        sign: {
-            text: 'Sign Up'
-        },
-        login: {
-            text: 'Login',
-            icon: 'login'
-        }
-    };
 
-    const img = BUTTON_TYPES[type]?.icon;
-    const text = BUTTON_TYPES[type]?.text || textBtn;
+    const img = BUTTON_TYPES[typeAction]?.icon;
+    const text = BUTTON_TYPES[typeAction]?.text || textBtn;
 
     return (
         <Button
@@ -35,6 +28,7 @@ const ButtonComponent = ({
             `}
             startIcon={img ? <Icon name={img} /> : null }
             onClick={onClick}
+            {...rest}
         >
             {text}
         </Button>
@@ -47,7 +41,9 @@ ButtonComponent.propTypes = {
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
     textBtn: PropTypes.string,
-    className: PropTypes.string
+    className: PropTypes.string,
+    formId: PropTypes.string,
+    typeAction: PropTypes.string
 };
 
 export default ButtonComponent;

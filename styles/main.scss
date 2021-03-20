@@ -21,10 +21,13 @@
 @import "../components/InfoCard/InfoCard";
 @import "../components/Pagination/Pagination";
 @import "../components/ModalForm/ModalForm";
+@import "../components/NoResults/NoResults";
 
 // Pages
+@import "../pages/home";
 @import "../pages/developers/developers";
 @import "../pages/resume/resume";
+@import "../pages/404/notFound.scss";
 
 // Base
 @import "base/general";

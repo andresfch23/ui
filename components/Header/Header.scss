@@ -13,11 +13,6 @@
             z-index: 1;
         }
 
-        &-logo {
-            width: 100px;
-            color: red;
-        }
-
         &-options {
             transition: all 0.3s linear;
 
@@ -89,7 +84,7 @@
 
     &__breadcrumb {
         color: $white;
-        font-weight: 100;
+        font-weight: $font-w-100;
             
         @media #{$medium-max} {
             font-size: 14px;
@@ -111,6 +106,7 @@
     &__searchbar {
         display: flex;
         color: $white;
+        justify-content: center;
 
         @media #{$medium-max} {
             width: 100%;
@@ -126,8 +122,15 @@
 
         &-container {
             background-color: $main-blue;
-            width: 200px;
             cursor: pointer;
+            max-width: 250px;
+            min-width: 200px;
+
+            @media #{$large-max} {
+                width: 200px;
+                max-width: none;
+                min-width: auto;
+            }
 
             @media #{$small-max} {
                 width: 100%;
@@ -180,6 +183,25 @@
             padding: 10px 15px;
             width: 340px;
 
+            &-container {
+                display: flex;
+                position: relative;
+                flex-grow: 1;
+
+                & .icon-x {
+                    position: absolute;
+                    right: 15px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    cursor: pointer;
+                    color: $white;
+                    background-color: $main-blue;
+                    font-size: 16px;
+                    padding: 3px;
+                    border-radius: 50%;
+                }
+            }
+
             @media #{$large-max} {
                 width: 150px;
             }
@@ -196,13 +218,18 @@
         &-button {
             outline: 0;
             background-color: $main-blue;
-            color: #B9C8DD;
+            color: $white;
             border: 1px solid white;
             padding: 0 15px;
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
             font-size: 14px;
             cursor: pointer;
+
+            &--disabled {
+                opacity: .5;
+                cursor: initial;
+            }
 
             @media #{$small-max} {
                 padding: 15px;
@@ -211,7 +238,7 @@
 
         & .text {
             position: absolute;
-            font-weight: 100;
+            font-weight: $font-w-100;
             top: 50%;
             right: 35px;
             transform: translateY(-45%);

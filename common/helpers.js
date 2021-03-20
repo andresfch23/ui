@@ -5,3 +5,10 @@ export const getFormattedInfo = (info = "", type = '_') => {
 
     return formattedInfo;
 };
+
+export const normalizeText = (text = '') => {
+    const trimText = text.replace(/\s+/g, ' ').trim();
+    const lowerCaseText = trimText.toLocaleLowerCase();
+
+    return lowerCaseText;
+};

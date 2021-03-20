@@ -1,0 +1,32 @@
+.no-results {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 680px;
+    padding: 30px;
+    margin: 0 20px;
+    border: 1px solid $gray-ash-light;
+    box-shadow: 0px 5px 10px 1px $gray-ash-light;
+    border-radius: 10px;
+    color: $gray-dark;
+
+    &__text {
+        font-size: 30px;
+        font-weight: bold;
+        margin: 0 0 10px 0;
+    }
+
+    &__subtext {
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    &__list {
+        padding-left: 20px;
+        margin-bottom: 0;
+
+        &-item {
+            margin-bottom: 5px;
+        }
+    }
+}

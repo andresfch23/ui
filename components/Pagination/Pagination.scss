@@ -2,6 +2,10 @@
     margin: 40px auto;
     width: fit-content;
 
+    &__no-results {
+        display: none;
+    }
+
     &__container {
         @include border-button;
         margin-bottom: 10px;

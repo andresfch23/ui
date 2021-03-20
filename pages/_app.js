@@ -6,7 +6,7 @@ import { StylesProvider, createMuiTheme, ThemeProvider } from "@material-ui/core
 import PropTypes from 'prop-types';
 import "../styles/main.scss";
 import { useEffect } from "react";
-
+import FiltersProvider from '../contexts/FiltersProvider';
 
 const theme = createMuiTheme({
     typography: {
@@ -35,6 +35,7 @@ const theme = createMuiTheme({
 });
 
 function MyApp({ Component, pageProps }) {
+    const title = pageProps.title || 'Toptal - Hire Freelance Talent from the Top 3%';
 
     useEffect(() => {
         const jssStyles = document.querySelector('#jss-server-side');
@@ -48,14 +49,16 @@ function MyApp({ Component, pageProps }) {
         <>  
             <Head>
                 <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
-                <title> UI Search</title>
+                <title>{title}</title>
             </Head>
             <ThemeProvider theme={theme}>
                 <StylesProvider injectFirst>
-                    <Header />
-                    <IconsCollection />
-                    <Component {...pageProps} />
-                    <Footer />
+                    <FiltersProvider>
+                        <Header />
+                        <IconsCollection />
+                        <Component {...pageProps} />
+                        <Footer />
+                    </FiltersProvider>
                 </StylesProvider>
             </ThemeProvider>
         </>

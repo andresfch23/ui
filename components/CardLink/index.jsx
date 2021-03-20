@@ -18,7 +18,7 @@ const CardLink = ({ title = '', links = [], optionButtons = {} }) => {
             {Object.entries(optionButtons).length ? (
                 <Button 
                     color={optionButtons.color}
-                    type={optionButtons.type}
+                    typeAction={optionButtons.type}
                 />
             ) : null}
         </div>

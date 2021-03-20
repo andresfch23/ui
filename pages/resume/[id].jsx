@@ -1,27 +1,13 @@
-import Icon from '../../components/Icon';
+import PropTypes from 'prop-types';
 import Image from 'next/image';
+import Icon from '../../components/Icon';
 import ModalForm from '../../components/ModalForm';
+import { getDevelopers, getSpecializations } from '../../requests';
+import { FiltersContext } from '../../contexts/FiltersProvider';
+import { useContext, useEffect } from 'react';
 
-const Resume = () => {
-    const data = {
-        "id": 1,
-        "first_name": "Willabella",
-        "last_name": "Batten",
-        "city": "Sampacho",
-        "country": "Argentina",
-        "category": "Full-stack developer",
-        "skills": [
-            {
-                "title": "React"
-            },
-            {
-                "title": "PHP"
-            }
-        ],
-        "generalBio": "Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.",
-        "bio": "Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.\n\nMaecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.\n\nCurabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.\n\nInteger tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.\n\nPraesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.",
-        "photoUrl": "http://dummyimage.com/100x100.jpg/cc0000/ffffff"
-    };
+const Resume = ({ selectedDeveloper, specializations }) => {
+    const { setSpecializations , setSelectedDeveloper} = useContext(FiltersContext);
 
     const {
         first_name,
@@ -32,13 +18,18 @@ const Resume = () => {
         category,
         city,
         country
-    } = data;
+    } = selectedDeveloper;
 
     const fullName = `${first_name} ${last_name}`;
     const subtitleText = `${skills[0].title} expert, ${category}`;
     const location = `${country}, ${city}`;
     let technologies = '';
     
+    useEffect(() => {
+        setSpecializations(specializations);
+        setSelectedDeveloper(selectedDeveloper);
+    }, []);
+
     skills.forEach((skill, idx) => {
         if (idx === skills.length - 1) {
             technologies += `${skill.title}.`;
@@ -70,7 +61,7 @@ const Resume = () => {
 
                 <aside className="resume-sidebar">
                     <h2 className="resume-sidebar__title">Contact Options</h2>
-                    <ModalForm fullName={fullName} />
+                    <ModalForm firstName={first_name} lastName={last_name} />
                 </aside>
 
                 <div className="resume-experience">
@@ -113,6 +104,37 @@ const Resume = () => {
             </div>
         </div>
     );
+};
+
+Resume.propTypes = {
+    selectedDeveloper: PropTypes.object,
+    specializations: PropTypes.array
+}
+
+export const getStaticPaths = async () => {
+    const developers = await getDevelopers();
+    const paths = developers.map(({ url }) => `/resume/${url}`);
+
+    return {
+        paths,
+        fallback: false,
+    }
+};
+
+export const getStaticProps = async (ctx) => {
+    const { id } = ctx.params;
+    const developers = await getDevelopers();
+    const specializations = await getSpecializations();
+    const selectedDeveloper = developers.find(dev => dev.url === id);
+    const { first_name, last_name } = selectedDeveloper;
+    const title = `Toptal | Resume | ${first_name} ${last_name}`;
+
+    return {
+        props: {
+            selectedDeveloper,
+            specializations,
+            title
+        }};
 };
 
 export default Resume;

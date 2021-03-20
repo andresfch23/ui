@@ -1,37 +1,104 @@
-import { useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Button from '../Button';
+import Image from 'next/image';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
 import Typography from '@material-ui/core/Typography';
 import MenuItem from '@material-ui/core/MenuItem';
+import { FiltersContext } from '../../contexts/FiltersProvider';
+import { DROPDOWN_DEFAULT_VALUE } from '../../common/constants';
+import Icon from '../Icon';
 
 const Header = () => {
+    const {
+        specializations,
+        toggleFilter,
+        categoryFilters,
+        setFilteredDeveloperByLocation,
+        setGlobalSearchText,
+        cleanGlobalSearchText,
+        selectedDeveloper
+    } = useContext(FiltersContext);
+    
+    const {
+        pathname,
+        push
+    } = useRouter();
+
+    const {
+        first_name = '',
+        last_name = ''
+    } = selectedDeveloper;
+
+    const isInResumePage = pathname.includes('/resume');
+    const breadcrumSelected = isInResumePage ? `${first_name} ${last_name}` : 'Find Developers';
+
     const [searchText, setSearchText] = useState('');
-    const [typeDeveloper, setTypeDeveloper] = useState('Select a developer');
+    const [options, setOptions] = useState([DROPDOWN_DEFAULT_VALUE]);
     const [openHamurguerMenu, setOpenHamburguerMenu] = useState(false);
+
+    useEffect(() => {
+        if (categoryFilters.length) {
+            setOptions(categoryFilters);
+        } else {
+            setOptions([DROPDOWN_DEFAULT_VALUE]);
+        }
+    }, [categoryFilters.length]);
 
     const onChangeText = (e) => {
         const value = e.target.value;
 
         setSearchText(value);
+
+        if (!value) {
+            cleanGlobalSearchText();
+        }
     }
+
+    const cleanText = () => {
+        setSearchText('');
+        cleanGlobalSearchText();
+    };
 
     const onToggleMenu = () => {
         setOpenHamburguerMenu(!openHamurguerMenu);
-    }
+    };
 
-    const handleChangeTypeDeveloper = (e) => {
-        const value = e.target.value;
+    const handleChangeTypeDeveloper = (value) => {
+        toggleFilter('category', value);
+    };
 
-        setTypeDeveloper(value);
+    const handleSearchByLocation = () => {
+        const routeDevelopers = '/developers';
+
+        if (pathname !== routeDevelopers) {
+            push(routeDevelopers);
+        }
+
+        setFilteredDeveloperByLocation(searchText);
+        setGlobalSearchText(searchText);
+    };
+
+    const handleEnterKey = (e) => {
+        if (e.keyCode === 13 && searchText) {
+            e.preventDefault();
+            handleSearchByLocation();
+        }
     }
 
     return (
         <div className='header'>
             <div className={`header__main ${openHamurguerMenu ? 'header__main--fixed' : ''}`}>
-                <img className='header__main-logo' src="./images/logo.svg" alt="Toptal logo"/>
+                
+                <Link href="/">
+                    <a>
+                        <Image src="/images/logo.svg" alt="Toptal logo" width={100} height={35} />
+                    </a>
+                </Link>
+
                 <nav className={`header__main-options ${openHamurguerMenu ? 'header__main-options--opened' : ''}`}>
                     <Link href="/developers">
                         <a>Find Developers</a>
@@ -42,12 +109,12 @@ const Header = () => {
                     </Link>
 
                     <Button 
-                        type="sign"
+                        typeAction="sign"
                         color="secondary"
                     />
 
                     <Button 
-                        type="login"
+                        typeAction="login"
                         color="primary"
                     />
                 </nav>
@@ -61,23 +128,27 @@ const Header = () => {
 
             <div className={`header__secondary ${openHamurguerMenu ? 'header__secondary--fixed' : ''}`}>
                 <Breadcrumbs separator="›" aria-label="breadcrumb" className="header__breadcrumb">
-                    <Link href="/" onClick={() => {}}>
+                    <Link href="/">
                         <a>Home</a>
                     </Link>
-                    <Link href="#" onClick={() => {}}>
+                    <Link href="#">
                         <a>Why Top 3%</a>
                     </Link>
-                    
-                    <Typography className="header__breadcrumb-selected">Find Developers</Typography>
+                    {isInResumePage &&
+                        <Link href="/developers">
+                            <a>Find Developers</a>
+                        </Link>
+                    }
+                    <Typography className="header__breadcrumb-selected">{breadcrumSelected}</Typography>
                 </Breadcrumbs>
 
                 <div className="header__searchbar">
                     <FormControl variant="filled">
                         <Select
-                            onChange={handleChangeTypeDeveloper}
-                            value={typeDeveloper}
+                            value={options}
                             classes={{ root: 'header__searchbar-select select' }}
                             className="header__searchbar-container"
+                            multiple
                             MenuProps={{
                                 disablePortal: true,
                                 getContentAnchorEl: null,
@@ -91,25 +162,50 @@ const Header = () => {
                                 }
                             }}
                         >
-                            <MenuItem classes={{ root: 'header__searchbar-option' }} value={'Select a developer'}>Select a developer</MenuItem>
-                            <MenuItem value={40}>Full-stack developer</MenuItem>
-                            <MenuItem value={20}>Backend developer</MenuItem>
-                            <MenuItem value={60}>Mobile developer</MenuItem>
-                            <MenuItem value={10}>Frontend developer</MenuItem>
-                            <MenuItem value={30}>Data Science</MenuItem>
+                            <MenuItem
+                                classes={{ root: 'header__searchbar-option' }}
+                                value={DROPDOWN_DEFAULT_VALUE}
+                            >
+                                Select a developer
+                            </MenuItem>
+
+                            {
+                                specializations.map(({ id, title }) =>(
+                                    <MenuItem
+                                        onClick={() => handleChangeTypeDeveloper(title)}
+                                        key={id}
+                                        value={title}
+                                    >
+                                        {title}
+                                    </MenuItem>
+                                ))
+                            }
                         </Select>
                         <span className="text">in</span>
                     </FormControl>
 
-                    <input
-                        type="text"
-                        placeholder="Search by location ..."
-                        className="header__searchbar-input"
-                        value={searchText}
-                        onChange={onChangeText}
-                    />
+                    <div className="header__searchbar-input-container">
+                        <input
+                            type="text"
+                            placeholder="Search by location ..."
+                            className="header__searchbar-input"
+                            value={searchText}
+                            onChange={onChangeText}
+                            onKeyUp={handleEnterKey}
+                        />
 
-                    <button className="header__searchbar-button">Search</button>
+                        {searchText &&
+                            <Icon name='x' onClick={cleanText} />
+                        }
+                    </div>
+
+                    <button
+                        className={`header__searchbar-button ${!searchText ? 'header__searchbar-button--disabled' : ''}`}
+                        disabled={!searchText}
+                        onClick={handleSearchByLocation}
+                    >
+                        Search
+                    </button>
                 </div>
             </div>
         </div>

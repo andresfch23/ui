@@ -41,8 +41,8 @@
     }
 
     &__content {
-        padding: 0px 30px 8px;
-        margin: 18px 0 35px;
+        padding: 0px 30px 12px;
+        margin: 18px 0 30px;
     }
 
     &__footer {
@@ -57,6 +57,43 @@
 
         &:first-child {
             border-color: $gray-dark;
+        }
+    }
+
+    &__message {
+        margin-top: 30px;
+        font-size: 30px;
+
+        &-container {
+            height: 311px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    &__animations {
+        position: relative;
+        transform: scale(1.8);
+        margin: 30px 0;
+
+        &-button {
+            &--success {
+                background-color: #4caf50;
+    
+                &:hover {
+                    background-color: #388e3c;
+                }
+            }
+        }
+
+        &-progress {
+            color: $main-blue;
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            z-index: 1 ;
         }
     }
 }
@@ -83,6 +120,8 @@
     }
 
     &__item {
+        position: relative;
+
         &--email {
             grid-area: email;
         }
@@ -109,6 +148,7 @@
             font-size: 18px;
             font-weight: 500;
             padding: 13px;
+            width: 100%;
 
             &:focus {
                 outline: 1;
@@ -128,12 +168,33 @@
             max-height: 120px;
             resize: vertical;
         }
+
+        &-error {
+            color: #f44336;
+            position: absolute;
+            top: 121px;
+            letter-spacing: -0.04px;
+            left: 14px;
+            margin-top: 0;
+            font-size: 12px;
+        }
+
+        &-container {
+            width: 100%;
+            position: relative;
+        }
     }
 
     &__input {
         height: 50px;
         border-radius: 0;
         color: $gray;
+
+        & + .Mui-error {
+            position: absolute;
+            top: 50px;
+            margin-top: 0;
+        }
 
         & input {
             font-size: 18px;
