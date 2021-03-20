@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Button from '../Button';
@@ -22,7 +22,7 @@ const Header = () => {
         cleanGlobalSearchText,
         selectedDeveloper
     } = useContext(FiltersContext);
-    
+
     const {
         pathname,
         push
@@ -33,12 +33,22 @@ const Header = () => {
         last_name = ''
     } = selectedDeveloper;
 
-    const isInProfilePage = pathname.includes(PROFILE_ROUTE);
-    const breadcrumSelected = isInProfilePage ? `${first_name} ${last_name}` : 'Find Developers';
-
     const [searchText, setSearchText] = useState('');
     const [options, setOptions] = useState([DROPDOWN_DEFAULT_VALUE]);
     const [openHamurguerMenu, setOpenHamburguerMenu] = useState(false);
+
+    const hamburguerMenu = useRef();
+    const mainOptions = useRef();
+    const isInProfilePage = pathname.includes(PROFILE_ROUTE);
+    const breadcrumSelected = isInProfilePage ? `${first_name} ${last_name}` : 'Find Developers';
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside, true);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside, true);
+        };
+    });
 
     useEffect(() => {
         if (categoryFilters.length) {
@@ -47,6 +57,16 @@ const Header = () => {
             setOptions([DROPDOWN_DEFAULT_VALUE]);
         }
     }, [categoryFilters.length]);
+
+    const handleClickOutside = (e) => {
+        if (hamburguerMenu.current && hamburguerMenu?.current.contains(e.target)){
+            return;
+        }
+
+        if (mainOptions.current && !mainOptions?.current.contains(e.target)) {
+            setOpenHamburguerMenu(false);
+        }
+    }
 
     const onChangeText = (e) => {
         const value = e.target.value;
@@ -99,7 +119,7 @@ const Header = () => {
                     </a>
                 </Link>
 
-                <nav className={`header__main-options ${openHamurguerMenu ? 'header__main-options--opened' : ''}`}>
+                <nav ref={mainOptions} className={`header__main-options ${openHamurguerMenu ? 'header__main-options--opened' : ''}`}>
                     <Link href={DEVELOPERS_ROUTE}>
                         <a>Find Developers</a>
                     </Link>
@@ -117,7 +137,7 @@ const Header = () => {
                     />
                 </nav>
 
-                <button className={`header__hamburguer ${openHamurguerMenu ? 'header__hamburguer--opened' : ''}`} onClick={onToggleMenu} >
+                <button ref={hamburguerMenu} className={`header__hamburguer ${openHamurguerMenu ? 'header__hamburguer--opened' : ''}`} onClick={onToggleMenu} >
                     <span className="header__hamburguer-line"></span>
                     <span className="header__hamburguer-line"></span>
                     <span className="header__hamburguer-line"></span>
