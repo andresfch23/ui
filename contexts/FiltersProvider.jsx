@@ -37,26 +37,18 @@ const FiltersProvider = ({ children }) => {
         const filteredDevelopers = initialDevelopers.reduce((acc, dev) => {
             const hasDevSelectedCategories = _getDevsWithSelectedCategories(categoryFilter, dev.category);
             const hasDevSelectedSkills = _getDevsWithSelectedSkills(skillsFilter, dev.skills);
+            const hasCategoryNoSkills = categoryFilterLength && !skillsFilterLength;
+            const hasSkillsNoCategories = !categoryFilterLength && skillsFilterLength;
+            const hasBothFilters = hasDevSelectedCategories && hasDevSelectedSkills;
 
-            if (categoryFilterLength && !skillsFilterLength) {
-                if (hasDevSelectedCategories) {
-                    acc.push(dev);
-                }
-
-                return acc;
+            if (
+                (hasCategoryNoSkills && hasDevSelectedCategories) ||
+                (hasSkillsNoCategories && hasDevSelectedSkills) ||
+                (hasBothFilters)
+            ) {
+                return [...acc, dev];
             }
 
-            if (!categoryFilterLength && skillsFilterLength) {
-                if (hasDevSelectedSkills) {
-                    acc.push(dev);
-                }
-
-                return acc;
-            }
-
-            if (hasDevSelectedCategories && hasDevSelectedSkills) {
-                acc.push(dev);
-            }
             return acc;
         }, []);
 
@@ -116,10 +108,11 @@ const FiltersProvider = ({ children }) => {
 
     const setFilteredDeveloperByLocation = (location) => {
         let currentDevelopers;
+        const areDevelopersSelected = selectedDevelopers?.length;
 
-        if (!selectedDevelopers?.length && (allFilters.category.length || allFilters.skills.length))  {
+        if (!areDevelopersSelected && (allFilters.category.length || allFilters.skills.length))  {
             currentDevelopers = _filterDevelopers();
-        } else if (selectedDevelopers?.length) {
+        } else if (areDevelopersSelected) {
             currentDevelopers = selectedDevelopers;
         } else {
             currentDevelopers = initialDevelopers;

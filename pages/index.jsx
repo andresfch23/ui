@@ -5,7 +5,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { DEVELOPERS_ROUTE } from '../common/constants';
 
-export default function Home() {
+const Home = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             Router.replace(DEVELOPERS_ROUTE);
@@ -29,3 +29,5 @@ export default function Home() {
         </div>
     )
 }
+
+export default Home;
