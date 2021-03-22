@@ -8,8 +8,8 @@ import { useContext, useEffect } from 'react';
 import { PROFILE_ROUTE } from '../../common/constants';
 import experienceData from '../../common/experienceData';
 
-const Profile = ({ selectedDeveloper, specializations }) => {
-    const { setSpecializations , setSelectedDeveloper} = useContext(FiltersContext);
+const Profile = ({ selectedDeveloper, specializations, developers }) => {
+    const { setSpecializations , setSelectedDeveloper, setInitialDevelopers } = useContext(FiltersContext);
 
     const {
         first_name,
@@ -30,6 +30,7 @@ const Profile = ({ selectedDeveloper, specializations }) => {
     useEffect(() => {
         setSpecializations(specializations);
         setSelectedDeveloper(selectedDeveloper);
+        setInitialDevelopers(developers);
     }, []);
 
     skills.forEach((skill, idx) => {
@@ -98,7 +99,8 @@ const Profile = ({ selectedDeveloper, specializations }) => {
 
 Profile.propTypes = {
     selectedDeveloper: PropTypes.object,
-    specializations: PropTypes.array
+    specializations: PropTypes.array,
+    developers: PropTypes.array
 }
 
 export const getStaticPaths = async () => {
@@ -123,6 +125,7 @@ export const getStaticProps = async (ctx) => {
         props: {
             selectedDeveloper,
             specializations,
+            developers,
             title
         }};
 };
