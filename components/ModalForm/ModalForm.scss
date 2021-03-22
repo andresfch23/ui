@@ -9,7 +9,7 @@
         }
 
         @media #{$small-max} {
-            min-width: 405px;
+            min-width: 305px;
         }
 
         .icon-x {
@@ -168,6 +168,14 @@
             background-color: $chalk;
             max-height: 120px;
             resize: vertical;
+
+            & > div {
+                @media #{$extra-small-max} {
+                    transform: scale(.77);
+                    display: flex;
+                    justify-content: center;
+                }
+            }
         }
 
         &-error {

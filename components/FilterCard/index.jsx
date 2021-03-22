@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
@@ -16,24 +16,17 @@ const FilterCard = ({ info = [], title = '', typeFilter = '' }) => {
     let initialState = {};
     const {
         toggleFilter,
-        categoryFilters
+        allFilters
     } = useContext(FiltersContext);
-    const isCategory = typeFilter === 'category';
 
     info.forEach(({ id }) => { initialState[id] = false });
 
-    const [infoType, setInfoType] = useState(initialState);
-
     const handleChangeInfoType = (event, title) => {
-        if (!isCategory) {
-            setInfoType({ ...infoType, [event.target.name]: event.target.checked });
-        }
-
         toggleFilter(typeFilter, title);
     };
 
     const setCheckedValue = (value) => {
-        const findFilter = categoryFilters.find(filter => filter === value);
+        const findFilter = allFilters[typeFilter].find(filter => filter === value);
 
         if (findFilter) return true;
 
@@ -58,7 +51,7 @@ const FilterCard = ({ info = [], title = '', typeFilter = '' }) => {
                 <FormControl className="filter-card__control" component="fieldset">
                     <FormGroup className="filter-card__options">
                         {info.map(({ id, title }) => {
-                            const isChecked = isCategory ? setCheckedValue(title) : infoType[id];
+                            const isChecked = setCheckedValue(title);
 
                             return (
                                 <FormControlLabel

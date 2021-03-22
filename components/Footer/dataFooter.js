@@ -30,5 +30,5 @@ export const NETWORK_INFO = [
     { name: "twitter", link: "https://twitter.com/toptal" },
     { name: "facebook", link: "https://www.facebook.com/toptal" },
     { name: "google", link: "https://www.toptal.com/google" },
-    { name: "linkedin", link: "https://twitter.com/toptal" },
+    { name: "linkedin", link: "https://www.linkedin.com/company/toptal" },
 ];

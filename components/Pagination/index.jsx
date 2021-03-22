@@ -56,7 +56,7 @@ const Pagination = () => {
                         }
 
                         children = (
-                            <button className={disabled} type="button" onClick={(e) => onClickPage(e, page)}>
+                            <button className={disabled} disabled={disabled ? true : false} type="button" onClick={(e) => onClickPage(e, page)}>
                                 {type}
                             </button>
                         );
@@ -69,7 +69,7 @@ const Pagination = () => {
                         }
 
                         children = (
-                            <button className={disabled} type="button" onClick={(e) => onClickPage(e, page)}>
+                            <button className={disabled} disabled={disabled ? true : false} type="button" onClick={(e) => onClickPage(e, page)}>
                                 {type}
                             </button>
                         );

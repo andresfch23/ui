@@ -151,6 +151,7 @@ const FiltersProvider = ({ children }) => {
         currentResultsOfPage,
         categoryFilters: allFilters.category,
         skillsFilters: allFilters.skills,
+        allFilters,
         globalSearchText,
         selectedDeveloper,
         clickedFromPagination
